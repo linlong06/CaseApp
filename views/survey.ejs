@@ -1,0 +1,129 @@
+<%- include("./partials/header") %>
+
+<div class="container survey">
+    <h2 class="title">Welcome to take the survey!</h2>
+    <hr>
+    
+    <div class="col-md-12">
+        <form action="/survey" method="post">
+            <h3>Section 1: tell us about yourself</h3>
+            <hr>
+            <div>
+                <label for="state">1. What state do you live in?</label>
+                <input list="states" name="state" id="state">
+                <datalist id="states">
+                    <option value="AK"></option>
+                    <option value="AL"></option>
+                    <option value="AR"></option>
+                    <option value="AZ"></option>
+                </datalist>
+            </div>
+            
+            <div>
+                <label for="city">2. What city do you live in?</label>
+                <input type="text" name="city" id="city">
+            </div>
+            
+            <div>
+                <label for="name">3. What is the name of your school?</label>
+                <input type="text" name="name" id="name">
+            </div>
+            
+            <div>
+                <label for="grade">4. What grade are you in?</label>
+                <input list="grades" name="grade" id="grade">
+                <datalist id="grades">
+                    <option value="6th"></option>
+                    <option value="7th"></option>
+                    <option value="8th"></option>
+                    <option value="9th"></option>
+                    <option value="10th"></option>
+                    <option value="11th"></option>
+                    <option value="12th"></option>
+                    <option value="adult"></option>
+                </datalist>
+            </div>
+            <hr>
+
+            <h3>Section 2: survey on conflict</h3>
+            <div>
+                <p>Do you always have to have the last word in a disagreement?</p>
+                <input type="radio" name="c1" value="1" id="c1-1">
+                <label for="c1-1">Never</label>
+                <input type="radio" name="c1" value="2" id="c1-2">
+                <label for="c1-2">Almost never</label>
+                <input type="radio" name="c1" value="3" id="c1-3">
+                <label for="c1-3">Sometimes</label>
+                <input type="radio" name="c1" value="4" id="c1-4">
+                <label for="c1-4">Almost every time</label>
+                <input type="radio" name="c1" value="5" id="c1-5">
+                <label for="c1-5">Every time</label>
+            </div>
+            <div>
+                <p>It is hard to see another's point of view?</p>
+                <input type="radio" name="c2" value="1" id="c2-1">
+                <label for="c2-1">Never</label>
+                <input type="radio" name="c2" value="2" id="c2-2">
+                <label for="c2-2">Almost never</label>
+                <input type="radio" name="c2" value="3" id="c2-3">
+                <label for="c2-3">Sometimes</label>
+                <input type="radio" name="c2" value="4" id="c2-4">
+                <label for="c2-4">Almost every time</label>
+                <input type="radio" name="c2" value="5" id="c2-5">
+                <label for="c2-5">Every time</label>
+            </div>
+            <div>
+                <p>Do you always keep your opinion to yourself?</p>
+                <input type="radio" name="c3" value="1" id="c3-1">
+                <label for="c3-1">Never</label>
+                <input type="radio" name="c3" value="2" id="c3-2">
+                <label for="c3-2">Almost never</label>
+                <input type="radio" name="c3" value="3" id="c3-3">
+                <label for="c3-3">Sometimes</label>
+                <input type="radio" name="c3" value="4" id="c3-4">
+                <label for="c3-4">Almost every time</label>
+                <input type="radio" name="c3" value="5" id="c3-5">
+                <label for="c3-5">Every time</label>
+            </div>
+            <div>
+                <p>Have you been threatened for sharing your opinion?</p>
+                <input type="radio" name="c4" value="1" id="c4-1">
+                <label for="c4-1">Never</label>
+                <input type="radio" name="c4" value="2" id="c4-2">
+                <label for="c4-2">Almost never</label>
+                <input type="radio" name="c4" value="3" id="c4-3">
+                <label for="c4-3">Sometimes</label>
+                <input type="radio" name="c4" value="4" id="c4-4">
+                <label for="c4-4">Almost every time</label>
+                <input type="radio" name="c4" value="5" id="c4-5">
+                <label for="c4-5">Every time</label>
+            </div>
+            <div>
+                <p>Are you uncomfortable around conflict?</p>
+                <input type="radio" name="c5" value="1" id="c5-1">
+                <label for="c5-1">Never</label>
+                <input type="radio" name="c5" value="2" id="c5-2">
+                <label for="c5-2">Almost never</label>
+                <input type="radio" name="c5" value="3" id="c5-3">
+                <label for="c5-3">Sometimes</label>
+                <input type="radio" name="c5" value="4" id="c5-4">
+                <label for="c5-4">Almost every time</label>
+                <input type="radio" name="c5" value="5" id="c5-5">
+                <label for="c5-5">Every time</label>
+            </div>
+
+            <hr>
+
+            <h3>Section 3: survey on anger</h3>
+        
+
+            <hr>
+
+            <h3>Section 4: survey on self-esteem</h3>
+            
+            <input type="submit">
+        </form>
+    </div>
+</div>
+
+<%- include("./partials/footer") %>
