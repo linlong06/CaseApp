@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to State Your Case!</h1>
+            <p>Go through a jouney of knowing yourself today!</p>
+            <img class="img-fluid img-show" src="images/IMG_4636.JPG" height="500px">
+            <div>
+                <p><a class="btn btn-primary btn-large" href="/schools/new">Add Your School</a></p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+        <% schools.forEach(function(school){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <div class="caption"><h4><%= school.name %></h4></div>
+                    <div class="caption"><h4><%= school.state %>, <%= school.city %></h4></div>
+                    <p><a class="btn btn-primary" href="/schools/<%= school._id %>/newSurvey">Take Survey</a></p>
+                    <p><a class="btn btn-primary" href="/schools/<%= school._id %>/showSurvey">View Survey Results</a></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

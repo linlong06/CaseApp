@@ -8,7 +8,8 @@ var express             = require("express"),
     methodOverride      = require("method-override"),
     User                = require("./models/user"),
     School             = require("./models/school"),
-    Survey             = require("./models/survey");
+    Survey             = require("./models/survey"),
+    seedDB              = require("./seed");
 
 var indexRoutes         = require("./routes/index");
 
@@ -21,6 +22,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+seedDB();
 
 //passport config
 app.use(require("express-session")({

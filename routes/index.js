@@ -8,40 +8,90 @@ var express         = require("express"),
 
 // MAIN ROUTES
 router.get("/", function(req, res){
-    res.render("landing");
+    res.redirect("/schools");
 });
 
 router.get("/resources", function(req, res){
     res.render("resources");
 });
 
-router.get("/survey", middleware.isLoggedIn, function(req, res){
-    res.render("survey");
+router.get("/about", function(req, res){
+    res.render("about");
 });
 
-router.post("/survey", middleware.isLoggedIn, function(req, res) {
-    var school = {state: req.body.state, city: req.body.city, name: req.body.name};
-    var survey = {grade: req.body.grade, c1: req.body.c1, c2: req.body.c2, c3: req.body.c3, c4: req.body.c4, c5: req.body.c5};
-    School.create(school, function(err, addedSchool){
+
+router.get("/schools", function(req, res){
+    School.find({}, function(err, allSchools) {
         if (err) {
             console.log(err);
-        } else {
-            Survey.create(survey, function(err, addedSurvey){
-                if (err) {
-                    console.log(err);
-                } else {
-                    addedSchool.surveys.push(addedSurvey);
-                    addedSchool.save();
-                    res.render("submitted");
-                }
-            }); 
+        }
+        else {
+            res.render("schools/index", {schools: allSchools});
         }
     });
 });
 
-router.get("/about", function(req, res){
-    res.render("about");
+router.get("/schools/new", middleware.isLoggedIn, function(req, res){
+   res.render("schools/new"); 
 });
+
+router.post("/schools", middleware.isLoggedIn, function(req, res) {
+    var state = req.body.state;
+    var city = req.body.city;
+    var name = req.body.name;
+    var owner = {id: req.user._id, username: req.user.username};
+    var newSchool = {state: state, city: city, name: name, owner: owner};
+    School.create(newSchool, function(err, newAdded){
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/schools");
+        }
+    });
+});
+
+router.get("/schools/:id/showSurvey", middleware.checkSchoolOwnership, function(req, res){
+    School.findById(req.params.id).populate("surveys").exec(function(err, foundSchool){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("schools/showSurvey", {school: foundSchool});
+        }
+    });
+});
+
+
+router.get("/schools/:id/newSurvey", middleware.checkSchoolOwnership, function(req, res){
+    School.findById(req.params.id, function(err, foundSchool){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("schools/newSurvey", {school: foundSchool});
+        }
+    }); 
+});
+
+router.post("/schools/:id", middleware.checkSchoolOwnership, function(req, res){
+    School.findById(req.params.id, function(err, foundSchool){
+        if (err) {
+            console.log(err);
+        } else {
+            Survey.create(req.body.survey, function(err, addedSurvey){
+                if (err) {
+                    console.log(err);
+                } else {
+                    addedSurvey.save();
+                    foundSchool.surveys.push(addedSurvey);
+                    foundSchool.save();
+                    res.render("submitted", {survey: addedSurvey});                    
+                }
+            });
+        }
+    });
+});
+
+
+
 
 //===============
 // AUTH ROUTEs
@@ -60,7 +110,7 @@ router.post("/register", function(req, res){
         } else {
             passport.authenticate("local")(req, res, function(){
                 req.flash("success", "Welcome to State Your Case " + user.username);
-                res.redirect("/survey");
+                res.redirect("/schools");
             });
         }
     });
@@ -71,13 +121,13 @@ router.get("/login", function(req, res){
 });
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/survey",
+    successRedirect: "/",
     failureRedirect: "/login"}), function(req, res) {});
 
 router.get("/logout", function(req, res) {
     req.logout();
     req.flash("success", "You have successfully logged out!");
-    res.redirect("/");
+    res.redirect("/schools");
 });
 
 module.exports = router;

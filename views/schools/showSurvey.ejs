@@ -1,0 +1,99 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+
+    <div class="well">
+        <table class="body">
+            <thead>
+                <tr>
+                    <th>Grade</th>
+                    <th>c-1</th>
+                    <th>c-2</th>
+                    <th>c-3</th>
+                    <th>c-4</th>
+                    <th>c-5</th>
+                    <th>a-1</th>
+                    <th>a-2</th>
+                    <th>a-3</th>
+                    <th>a-4</th>
+                    <th>a-5</th>
+                    <th>s-1</th>
+                    <th>s-2</th>
+                    <th>s-3</th>
+                    <th>s-4</th>
+                    <th>s-5</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <% school.surveys.forEach(function(survey){ %>
+                    <tr>
+                        <td><%= survey.grade %></td>
+                        <td><%= survey.c1 %></td>
+                        <td><%= survey.c2 %></td>
+                        <td><%= survey.c3 %></td>
+                        <td><%= survey.c4 %></td>
+                        <td><%= survey.c5 %></td>
+                        <td><%= survey.a1 %></td>
+                        <td><%= survey.a2 %></td>
+                        <td><%= survey.a3 %></td>
+                        <td><%= survey.a4 %></td>
+                        <td><%= survey.a5 %></td>
+                        <td><%= survey.s1 %></td>
+                        <td><%= survey.s2 %></td>
+                        <td><%= survey.s3 %></td>
+                        <td><%= survey.s4 %></td>
+                        <td><%= survey.s5 %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    
+    <div>
+        <h4>Score Defitions</h4>
+        <ul class="questions">
+            <li>1: Never</li>
+            <li>2: Almost never</li>
+            <li>3: Sometimes</li>
+            <li>4: Almost every time</li>
+            <li>5: Every time</li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>List of questions about conflict:</h4>
+        <ul class="questions">
+            <li>c-1: Do you always have to have the last word in a disagreement?</li>
+            <li>c-2: It is hard to see another's point of view?</li>
+            <li>c-3: Do you always keep your opinion to yourself?</li>
+            <li>c-4: Have you been threatened for sharing your opinion?</li>
+            <li>c-5: Are you uncomfortable around conflict?</li>
+        </ul>
+    </div> 
+    
+    <div>
+        <h4>List of questions about anger:</h4>
+        <ul class="questions">
+            <li>a-1: When you get angry do you think of hurting yourself?</li>
+            <li>a-2: Do you keep your anger bottled up inside?</li>
+            <li>a-3: Do you have to scream or hit something to get your anger out?</li>
+            <li>a-4: How often do you get angry?</li>
+            <li>a-5: Does anyone around you take their anger out on you or the people you love?</li>
+        </ul>
+    </div>  
+    
+    <div>
+        <h4>List of questions about self-esteem:</h4>
+        <ul class="questions">
+            <li>s-1: Do you like what you see when you look in the mirror?</li>
+            <li>s-2: Do you remain friends with people that call you names or treat you badly?</li>
+            <li>s-3: Do you compare yourself to friends and people around you?</li>
+            <li>s-4: Do people you love the most talk negative to you or put you down?</li>
+            <li>s-5: Do you always focus on your weaknesses?</li>
+        </ul>
+    </div>     
+    
+</div>
+
+<%- include("../partials/footer") %>

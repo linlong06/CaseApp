@@ -55,5 +55,18 @@ h1 .title {
 }
 
 
+/* school page styling*/
+.container {
+    background-image: url('images/IMG_4636.JPG');
+}
+
+.img-show {
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+.questions li {
+    font-size: 1.5rem;
+}
 
 

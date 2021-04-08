@@ -4,6 +4,13 @@ var schoolSchema = new mongoose.Schema({
     state: String,
     city: String,
     name: String,
+    owner: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    },
     surveys: [
         {
             type: mongoose.Schema.Types.ObjectId,
