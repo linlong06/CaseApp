@@ -4,6 +4,7 @@ var schoolSchema = new mongoose.Schema({
     state: String,
     city: String,
     name: String,
+    zipcode: String,
     owner: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

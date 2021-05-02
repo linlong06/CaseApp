@@ -6,30 +6,37 @@
         <h2 class="title">Thank you for submitting your survey!</h2>
         <hr>
         <h3>Here is the result of your survey:</h3>
-        <% var score = survey.c1 + survey.c2 + survey.c3 + survey.c4 + survey.c5; %>
-        <% var result; %>
-        <% if (score <= 11) {result = "You are good!"} 
-        else if (score > 11 && score <= 21) {result = "You might want to keep an eye on this topic. Find people who encourage you to try your best, but don't insist on perfection. Most of us do better when the pressure is off."} 
-        else if (score > 21) {result = "This seems to be an area of struggle for you. Click on the resources tab to get support and help."}; %> 
-        <h4>Conflict: <%= result %></h4>
+        <% var scoreConflict = survey.c1 + survey.c2 + survey.c3 + survey.c4 + survey.c5; %>
+        <% var resultConflict; %>
+        <% if (scoreConflict <= 11) {resultConflict = "You are good!"} 
+        else if (scoreConflict > 11 && scoreConflict <= 21) {resultConflict = "You might want to keep an eye on this topic. Find people who encourage you to try your best, but don't insist on perfection. Most of us do better when the pressure is off."} 
+        else if (scoreConflict > 21) {resultConflict = "This seems to be an area of struggle for you. Click on the resources tab or find a psychologist below to get support and help."}; %> 
+        <h4>Conflict: <%= resultConflict %></h4>
         
         <hr>
         
-        <% var score = survey.a1 + survey.a2 + survey.a3 + survey.a4 + survey.a5; %>
-        <% var result; %>
-        <% if (score <= 11) {result = "You are good!"} 
-        else if (score > 11 && score <= 21) {result = "You might want to keep an eye on this topic. Find people who encourage you to try your best, but don't insist on perfection. Most of us do better when the pressure is off."} 
-        else if (score > 21) {result = "This seems to be an area of struggle for you. Click on the resources tab to get support and help."}; %> 
-        <h4>Anger: <%= result %></h4>
+        <% var scoreAnger = survey.a1 + survey.a2 + survey.a3 + survey.a4 + survey.a5; %>
+        <% var resultAnger; %>
+        <% if (scoreAnger <= 11) {resultAnger = "You are good!"} 
+        else if (scoreAnger > 11 && scoreAnger <= 21) {resultAnger = "You might want to keep an eye on this topic. Find people who encourage you to try your best, but don't insist on perfection. Most of us do better when the pressure is off."} 
+        else if (scoreAnger > 21) {resultAnger = "This seems to be an area of struggle for you. Click on the resources tab or find a psychologist below to get support and help."}; %> 
+        <h4>Anger: <%= resultAnger %></h4>
         
         <hr> 
         
-        <% var score = survey.s1 + survey.s2 + survey.s3 + survey.s4 + survey.s5; %>
-        <% var result; %>
-        <% if (score <= 11) {result = "You are good!"} 
-        else if (score > 11 && score <= 21) {result = "You might want to keep an eye on this topic. Find people who encourage you to try your best, but don't insist on perfection. Most of us do better when the pressure is off."} 
-        else if (score > 21) {result = "This seems to be an area of struggle for you. Click on the resources tab to get support and help."}; %> 
-        <h4>Self-Esteem: <%= result %></h4>
+        <% var scoreSE = survey.s1 + survey.s2 + survey.s3 + survey.s4 + survey.s5; %>
+        <% var resultSE; %>
+        <% if (scoreSE <= 11) {resultSE = "You are good!"} 
+        else if (scoreSE > 11 && scoreSE <= 21) {resultSE = "You might want to keep an eye on this topic. Find people who encourage you to try your best, but don't insist on perfection. Most of us do better when the pressure is off."} 
+        else if (scoreSE > 21) {resultSE = "This seems to be an area of struggle for you. Click on the resources tab or find a psychologist below to get support and help."}; %> 
+        <h4>Self-Esteem: <%= resultSE %></h4>
+        
+        <hr>
+        
+        <% if (scoreConflict > 21 || scoreAnger > 21 || scoreSE > 21){ %>
+            <h4>Find a psychologist <a href="https://locator.apa.org/results/1/<%= school.zipcode %>/25/">here</a>, or search on <a href="https://www.aacap.org//AACAP/Member_Services/Find_A_Physician.aspx">AACAP website</a>.</h4>
+        <% } %>
+        
     </div>
 </div>
 

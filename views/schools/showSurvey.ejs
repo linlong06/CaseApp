@@ -1,9 +1,29 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-
+    
+    <div class ="summary">
+        <h3>Summary of Survey Entries:</h3>
+        <% const total = school.surveys.length; %>
+        <% var conflict = 0, anger = 0, se = 0; %>
+        <% school.surveys.forEach(function(survey){
+            var scoreConflict = survey.c1 + survey.c2 + survey.c3 + survey.c4 + survey.c5;
+            var scoreAnger = survey.a1 + survey.a2 + survey.a3 + survey.a4 + survey.a5;
+            var scoreSE = survey.s1 + survey.s2 + survey.s3 + survey.s4 + survey.s5;
+            if (scoreConflict > 21) conflict++;
+            if (scoreAnger > 21) anger++;
+            if (scoreSE > 21) se++;
+        }); %>
+        <h4><%= Math.floor(conflict / total * 100) + "%" %> of survey entries indicate <i>conflict</i> problem</h4>
+        <h4><%= Math.floor(anger / total * 100) + "%" %> of survey entries indicate <i>anger</i> problem</h4>
+        <h4><%= Math.floor(se / total * 100) + "%" %> of survey entries indicate <i>self-esteem</i> problem</h4>
+    </div>
+    
+    <hr>
+    
     <div class="well">
         <table class="body">
+            <caption>List of All Survey Entries</caption>
             <thead>
                 <tr>
                     <th>Grade</th>

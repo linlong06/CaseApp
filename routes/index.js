@@ -39,8 +39,9 @@ router.post("/schools", middleware.isLoggedIn, function(req, res) {
     var state = req.body.state;
     var city = req.body.city;
     var name = req.body.name;
+    var zipcode = req.body.zipcode
     var owner = {id: req.user._id, username: req.user.username};
-    var newSchool = {state: state, city: city, name: name, owner: owner};
+    var newSchool = {state: state, city: city, name: name, zipcode: zipcode, owner: owner};
     School.create(newSchool, function(err, newAdded){
         if (err) {
             console.log(err);
@@ -83,7 +84,7 @@ router.post("/schools/:id", middleware.checkSchoolOwnership, function(req, res){
                     addedSurvey.save();
                     foundSchool.surveys.push(addedSurvey);
                     foundSchool.save();
-                    res.render("submitted", {survey: addedSurvey});                    
+                    res.render("submitted", {school: foundSchool, survey: addedSurvey});                    
                 }
             });
         }
@@ -109,7 +110,7 @@ router.post("/register", function(req, res){
             return res.render("register");
         } else {
             passport.authenticate("local")(req, res, function(){
-                req.flash("success", "Welcome to State Your Case " + user.username);
+                req.flash("success", "Welcome to State Your CASE " + user.username);
                 res.redirect("/schools");
             });
         }
