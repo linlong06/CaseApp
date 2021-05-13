@@ -70,3 +70,7 @@ h1 .title {
 }
 
 
+/* register page styling*/
+#registerForm {
+    max-width: 600px;
+}
