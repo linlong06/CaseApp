@@ -4,7 +4,20 @@ var express         = require("express"),
     User            = require("../models/user"),
     School          = require("../models/school"),
     Survey          = require("../models/survey"),
-    middleware      = require("../middleware/index")
+    middleware      = require("../middleware/index"),
+    multer          = require("multer"),
+    fs              = require("fs");
+    
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+  }
+})
+
+var upload = multer({ storage: storage })
 
 // MAIN ROUTES
 router.get("/", function(req, res){
@@ -12,7 +25,24 @@ router.get("/", function(req, res){
 });
 
 router.get("/resources", function(req, res){
-    res.render("resources");
+    let filenames = fs.readdirSync("public/uploads");
+    filenames.forEach((file) => {
+        console.log(file)
+    });
+    res.render("resources", {filenames: filenames});
+});
+
+router.post("/resources/upload", upload.single("file"), function(req, res, next){
+    // res.send(req.body, req.file);
+    // console.log(req.body);
+    // console.log(req.file);
+    res.redirect("/resources");
+});
+
+router.get("/resources/download/:file", function(req, res){
+    const path = "public/uploads/" + req.params.file;
+    // console.log(path);
+    res.download(path);
 });
 
 router.get("/about", function(req, res){
