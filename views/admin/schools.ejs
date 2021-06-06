@@ -1,0 +1,34 @@
+<%- include("../partials/header") %>
+
+<div>
+    <p><a class="btn btn-primary btn-large" href="/admin/schools/new">Add School</a></p>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <caption>List of Schools</caption>
+        <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Location</th>
+              <th scope="col">Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% schools.forEach(function(school){ %>
+                <tr>
+                    <td><%= school.name %></td>
+                    <td><%= school.city %>, <%= school.state %> <%= school.zipcode %></td>
+                    <td>
+                        <a class="btn btn-xs btn-success" href="/admin/schools/<%=school._id %>/survey">Survey Results</a>
+                        <form class="delete-form" action="/admin/schools/<%=school._id %>?_method=DELETE" method="POST">
+                            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+         </tbody>
+    </table>
+</div>
+
+<%- include("../partials/footer") %>

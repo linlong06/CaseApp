@@ -26,6 +26,15 @@ function seedDB() {
             });
         }
     });
+    
+    var newUser = new User({username: process.env.ADMIN_USERNAME});
+    User.register(newUser, process.env.ADMIN_PASSWORD, function(err){
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Add admin account!");
+        }
+    });
 }
 
 module.exports = seedDB;

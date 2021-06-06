@@ -15,9 +15,9 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, file.originalname)
   }
-})
+});
 
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 
 // MAIN ROUTES
 router.get("/", function(req, res){
@@ -33,9 +33,6 @@ router.get("/resources", function(req, res){
 });
 
 router.post("/resources/upload", upload.single("file"), function(req, res, next){
-    // res.send(req.body, req.file);
-    // console.log(req.body);
-    // console.log(req.file);
     res.redirect("/resources");
 });
 
@@ -92,7 +89,7 @@ router.get("/schools/:id/showSurvey", middleware.checkSchoolOwnership, function(
 });
 
 
-router.get("/schools/:id/newSurvey", middleware.checkSchoolOwnership, function(req, res){
+router.get("/schools/:id/newSurvey", function(req, res){
     School.findById(req.params.id, function(err, foundSchool){
         if (err) {
             console.log(err);
@@ -102,7 +99,7 @@ router.get("/schools/:id/newSurvey", middleware.checkSchoolOwnership, function(r
     }); 
 });
 
-router.post("/schools/:id", middleware.checkSchoolOwnership, function(req, res){
+router.post("/schools/:id", function(req, res){
     School.findById(req.params.id, function(err, foundSchool){
         if (err) {
             console.log(err);
@@ -151,14 +148,19 @@ router.get("/login", function(req, res){
     res.render("login");
 });
 
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login"}), function(req, res) {});
+router.post("/login", passport.authenticate("local", 
+    {failureRidirect: "/login"}), function(req, res) {
+    if (req.user.username == "admin@nywusa.com") {
+        res.redirect("/admin");
+    } else {
+        res.redirect("/");
+    }});
 
 router.get("/logout", function(req, res) {
     req.logout();
     req.flash("success", "You have successfully logged out!");
     res.redirect("/schools");
 });
+
 
 module.exports = router;

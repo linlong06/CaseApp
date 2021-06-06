@@ -1,4 +1,6 @@
 // package declaration
+require('dotenv').config()
+
 var express             = require("express"),
     bodyParser          = require("body-parser"),
     mongoose            = require("mongoose"),
@@ -12,6 +14,7 @@ var express             = require("express"),
     seedDB              = require("./seed");
 
 var indexRoutes         = require("./routes/index");
+var adminRoutes         = require("./routes/admin");
 
 // express and DB configuration
 var app = express();
@@ -44,6 +47,7 @@ app.use(function(req, res, next){
 });
 
 app.use("/", indexRoutes);
+app.use("/admin", adminRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Server has started!"); 

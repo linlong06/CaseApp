@@ -10,6 +10,15 @@ middlewareObj.isLoggedIn = function(req, res, next) {
     }
 }
 
+middlewareObj.checkAdmin = function(req, res, next) {
+    if (req.isAuthenticated() && req.user.username == process.env.ADMIN_USERNAME) {
+        return next();
+    } else {
+        req.flash("error", "You need to log in admin account to do that!");
+        res.redirect("/login");
+    }
+}
+
 middlewareObj.checkSchoolOwnership = function(req, res, next) {
     if (req.isAuthenticated()) {
         School.findById(req.params.id, function(err, foundSchool){
